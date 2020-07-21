@@ -2,7 +2,7 @@
 	<div class="col-xs-6">
 		<div class="box">
 			<div class="box-header with-border">
-				<h3 class="box-title">Data Curah Hujan</h3>
+				<h3 class="box-title">Data Curah Hujan Stasiun "<?= $data['nama_stasiun']?>"</h3>
 				<div class="box-tools">
 					<a href="<?= site_url('curah-hujan') ?>" class="btn btn-danger btn-sm"><i class="fa fa-angle-double-left"></i> Kembali</a>
 				</div>

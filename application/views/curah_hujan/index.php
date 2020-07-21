@@ -11,15 +11,20 @@
 						<tr>
 							<th class="text-center" width="40px">No.</th>
 							<th>Nama Stasiun</th>
+							<th class="text-right">Total Curah Hujan (mm)</th>
 							<th class="text-center" width="100px">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php $no = 1;
-						foreach ($data as $d) { ?>
+						foreach ($data as $d) {
+							$id = $d['id_stasiun'];
+							$total = $this->db->query("SELECT SUM(jumlah_curah) as total FROM curah_hujan WHERE stasiun_curah='$id'")->row_array();
+						?>
 							<tr>
 								<td class="text-center"><?= $no . '.' ?></td>
 								<td><?= $d['nama_stasiun'] ?></td>
+								<td class="text-right"><?= format_koma($total['total'])?></td>
 								<td class="text-center">
 									<a href="javascript:void(0)" onclick="edit('<?= $d['id_stasiun'] ?>')"><i class="icon-pencil7 text-green" data-toggle="tooltip" data-original-title="Edit Data"></i></a>
 									<a href="<?php echo site_url('stasiun/destroy/' . $d['id_stasiun']) ?>" onclick="return confirm('Yakin akan hapus data ini ?');"><i class="icon-trash text-red" data-toggle="tooltip" data-original-title="Hapus Data"></i></a>
