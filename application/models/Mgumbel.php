@@ -1,7 +1,7 @@
 <?php
 class Mgumbel extends CI_Model
 {
-	public function show($kode)
+	public function show($kode = null)
 	{
 		$this->db->where('stasiun_curah', $kode);
 		$this->db->order_by('jumlah_curah', 'DESC');
