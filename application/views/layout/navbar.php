@@ -17,5 +17,6 @@
 				</li>
 			</ul>
 		</li>
+		<li class="<?= $urls == "uji-kesesuain" ? "active" : null ?>"><a href="<?= site_url('uji-kesesuain') ?>"><i class="ion-contrast"></i> Uji Kesesuain</a></li>
 	</ul>
 </div>

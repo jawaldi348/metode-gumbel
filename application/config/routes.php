@@ -12,3 +12,6 @@ $route['metode-gumbel/show/(:any)'] = 'gumbel/show/$1';
 
 $route['log-pearson'] = 'log_pearson';
 $route['log-pearson/show/(:any)'] = 'log_pearson/show/$1';
+
+$route['uji-kesesuain'] = 'Uji';
+$route['uji-kesesuain/show/(:any)'] = 'Uji/show/$1';

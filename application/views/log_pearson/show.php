@@ -69,6 +69,7 @@
 							<th class="text-right">
 								<?php $standar_deviasai = sqrt($pangkat2 / (count($method) - 1)) ?>
 								<?= format_koma($standar_deviasai) ?>
+								
 							</th>
 							<th></th>
 						</tr>
