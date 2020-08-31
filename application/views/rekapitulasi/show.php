@@ -71,7 +71,7 @@ $standar_deviasai_log = sqrt($pangkat2_log / (count($log_pearson) - 1)); ?>
 						foreach ($periode_log as $key_log => $value_log) {?>
 							<td class="text-center">
 								<?php
-								$nilai = $ratalog+$value_log*$standar_deviasai_log;
+								$nilai = $ratalog+$value_log['value']*$standar_deviasai_log;
 								echo format_koma(pow(10,$nilai));
 								?>
 							</td>

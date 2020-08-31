@@ -17,6 +17,29 @@
 				</li>
 			</ul>
 		</li>
-		<li class="<?= $urls == "uji-kesesuain" ? "active" : null ?>"><a href="<?= site_url('uji-kesesuain') ?>"><i class="ion-contrast"></i> Uji Kesesuain</a></li>
+		<li class="<?= $urls == "uji-kesesuain" || $urls == "Chi-Kuadrat" ? "active" : null ?>">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="ion-contrast"></i> Uji Kesesuain <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li class="<?= $urls == "rekapitulasi" ? "active" : null ?>">
+					<a href="<?= site_url('uji-kesesuain') ?>">Penentuan Jenis Distribusi</a>
+				</li>
+				<li class="<?= $urls == "Chi-Kuadrat" ? "active" : null ?>">
+					<a href="<?= site_url('Chi-Kuadrat') ?>">Metode <i>Chi-Kuadrat</i></a>
+				</li>
+				<li class="<?= $urls == "Rekapitulasi-Nilai" ? "active" : null ?>">
+					<a href="<?= site_url('Rekapitulasi-Nilai') ?>">Rekapitulasi Nilai X2 & X2cr untuk Gumbel</a>
+				</li>
+			</ul>
+		</li>
+		<li class="<?= $urls == "Metode-Hasper" || $urls == "Chi-Kuadrat" ? "active" : null ?>">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="ion-contrast"></i> Analisis Debit Banjir Rencana<span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li class="<?= $urls == "Metode-Hasper" ? "active" : null ?>">
+					<a href="<?= site_url('Metode-Hasper') ?>">Metode Hasper </a>
+				</li>
+			</ul>
+		</li>
+		
 	</ul>
+
 </div>

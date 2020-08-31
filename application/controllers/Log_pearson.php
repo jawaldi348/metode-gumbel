@@ -32,4 +32,18 @@ class Log_pearson extends CI_Controller
 		];
 		$this->template->display('log_pearson/show', $data);
 	}
+	public function edit()
+	{
+		$kode = $this->input->post('kode');
+		$d['data'] = $this->Mlog_pearson->reduced_variated_Show($kode);
+		$this->load->view('log_pearson/edit_k', $d);
+	}
+		public function update()
+	{
+		$param = $this->input->post(null, TRUE);
+echo		$kode = $param['kode'];
+echo		$kode = $param['value'];
+		$this->Mlog_pearson->reduced_variated_Update($param);
+		// $this->session->set_flashdata('pesan', sukses('Anda telah mengubah data tahun curah hujan.'));
+	}
 }

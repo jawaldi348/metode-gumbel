@@ -15,3 +15,12 @@ $route['log-pearson/show/(:any)'] = 'log_pearson/show/$1';
 
 $route['uji-kesesuain'] = 'Uji';
 $route['uji-kesesuain/show/(:any)'] = 'Uji/show/$1';
+
+$route['Chi-Kuadrat'] = 'Chi_Kuadrat';
+$route['Chi-Kuadrat/show/(:any)'] = 'Chi_Kuadrat/show/$1';
+
+$route['Rekapitulasi-Nilai'] = 'Rekapitulasi_Nilai';
+$route['Rekapitulasi-Nilai/show/(:any)'] = 'Rekapitulasi_Nilai/show/$1';
+
+$route['Metode-Hasper'] = 'Metode_hasper';
+$route['Metode-Hasper/show/(:any)'] = 'Metode_hasper/show/$1';

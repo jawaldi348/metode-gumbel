@@ -1,3 +1,18 @@
+<script type="text/javascript">
+	let edit=(val)=>{
+                 $.ajax({
+                      type: "post",
+                      url: "<?= site_url('Log_pearson/edit') ?>",
+					  data: "&kode=" + val,
+                      cache: false,
+                      success: function(response) {
+                        $('.tampil_modal').html(response);
+                        $('#modal_edit').modal('show');
+                      }
+                    });
+	}
+</script>
+        <div class="tampil_modal"></div>
 <div class="row">
 	<div class="col-xs-6">
 		<div class="box">
@@ -104,17 +119,22 @@
 					</tr>
 					<?php
 					$no=1;
-					foreach ($periode as $key => $value) {?>
+					foreach ($periode as $p) {?>
 						<tr>
 							<td class="text-center"><?= $no ?></td>
-							<td class="text-center"><?= $key ?></td>
+							<td class="text-center"><?= $p['key'] ?></td>
 							<td class="text-center"><?= format_koma($ratalog) ?></td>
-							<td class="text-center"><?= $value ?></td>
+							<td class="text-center"><?= format_koma($p['value']) ?>
+								
+
+								<a href="#" onclick="edit('<?= $p['key'] ?>')"><i class="fa fa-edit" data-toggle="tooltip" data-original-title="Uba Nilai K  <?= $p['key'] ?>"></i></a>
+
+							</td>
 							<td class="text-center"><?= format_koma($standar_deviasai) ?></td>
-							<td class="text-center"><?= format_koma($ratalog+$value*$standar_deviasai) ?></td>
+							<td class="text-center"><?= format_koma($ratalog+$p['value']*$standar_deviasai) ?></td>
 							<td class="text-center">
 								<?php
-								$nilai = $ratalog+$value*$standar_deviasai;
+								$nilai = $ratalog+$p['value']*$standar_deviasai;
 								echo format_koma(pow(10,$nilai));
 								?>
 							</td>
