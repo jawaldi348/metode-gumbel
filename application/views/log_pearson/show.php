@@ -48,7 +48,8 @@
 						$ratalog = $log / count($method);
 						foreach ($method as $m) {
 							$pangkat1 = $pangkat1 + (log10($m['jumlah_curah'])-$ratalog);
-							$pangkat2 = $pangkat2 + (pow(log10($m['jumlah_curah'])-$ratalog, 2));
+							// $pangkat2 = $pangkat2 + (pow(log10($m['jumlah_curah'])-$ratalog, 2));
+							$pangkat2 += pow(log10($m['jumlah_curah'])-$ratalog, 2);
 							$pangkat3 = $pangkat3 + (pow(log10($m['jumlah_curah'])-$ratalog, 3));
 						?>
 							<tr>
@@ -68,7 +69,7 @@
 							<th class="text-right"><?= format_koma($total) ?></th>
 							<th class="text-right"><?= format_koma($log) ?></th>
 							<th class="text-right"><?= format_koma($pangkat1) ?></th>
-							<th class="text-right"><?= format_koma($pangkat2) ?></th>
+							<th class="text-right"><?= $pangkat2 ?></th>
 							<th class="text-right"><?= format_koma($pangkat3) ?></th>
 						</tr>
 						<tr>
@@ -91,7 +92,13 @@
 						<tr>
 							<th colspan="5">Koefisien Kemencengan (Skewness)</th>
 							<th class="text-right">
-								<?= format_koma((10*$pangkat3)/(count($method)-1)*(count($method)-2) * pow($standar_deviasai,3)) ?></th>
+								<?php 
+										$x_var1=(round($pangkat3,4)*10);
+										$x_var2=(10-1) * (10-2) * pow($standar_deviasai,3);
+
+										$hasil= $x_var1 / $x_var2 ; 
+										echo format_koma($hasil);
+										 ?></th>
 						</tr>
 					</tfoot>
 				</table>

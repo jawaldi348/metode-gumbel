@@ -159,7 +159,8 @@ $standar_deviasai_log = sqrt($pangkat2_log / (count($log_pearson) - 1)); ?>
 // ------------------------------MODEL 1------------------------------------------------
 						
 $V_n=(-0.4)*($wkatukonsentrasi_t);
-$V_m=pow(10, $V_n);
+$V_nx=(-0.4);
+$V_m=pow(10, $V_nx);
 $V_o=$wkatukonsentrasi_t+(3.7*$V_m);
 
 //     /
@@ -204,7 +205,7 @@ $betaone=1+($V_q*$V_r);
 $vr_A=$wkatukonsentrasi_t;
 $vr_B=$vr_RT;
 // $vr_C=0.145;
-$vr_C=$betaone;
+$vr_C=1/$betaone;
 $vr_D=$luaspengaliran_a;
 
 $vr_E=($vr_A*$vr_B)/ ($vr_A+1);
@@ -225,7 +226,7 @@ $vr_G=$vr_C*$vr_D*65.60*$vr_F;
 								echo format_koma($vr_RT);
 								?>
 						</th>
-						<th style="text-align: center;"><?= format_koma($betaone);  ?></th>
+						<th style="text-align: center;"><?= format_koma($vr_C);  ?></th>
 						<th style="text-align: center;"><?= format_koma($luaspengaliran_a); ?></th>
 						<th style="text-align: center;"><?= format_koma($vr_E) ?></th>
 						<th style="text-align: center;"><?= format_koma($vr_F) ?></th>
@@ -272,7 +273,7 @@ $vr_G=$vr_C*$vr_D*65.60*$vr_F;
 						<th style="text-align: center;"> </th>
 						<th style="text-align: center;">(axb) / (a+1) </th>
 						<th style="text-align: center;">e / (3,6xa) </th>
-						<th style="text-align: center;">c x d x 65,60 x f </th>
+						<th style="text-align: center;">c x d x <?= $data_sungai['luas']  ?> x f </th>
 					</tr>
 					<?php 
 						$wkatukonsentrasi_t =0.1*(pow($data_sungai['panjang'],0.8))*(pow($data_sungai['kemiringan'],-0.3));
@@ -283,7 +284,8 @@ $vr_G=$vr_C*$vr_D*65.60*$vr_F;
 // ------------------------------MODEL 1------------------------------------------------
 						
 $V_n=(-0.4)*($wkatukonsentrasi_t);
-$V_m=pow(10, $V_n);
+$V_nx=(-0.4);
+$V_m=pow(10, $V_nx);
 $V_o=$wkatukonsentrasi_t+(3.7*$V_m);
 
 //     /
@@ -296,6 +298,7 @@ $V_r=pow($data_sungai['luas'], (3/4)) / 12; //p3
 
 $betaone=1+($V_q*$V_r);
 
+// echo ;
 // --------------------------------BETA 2-----------------------------------------
 
 // $V_n=(-0.4)*($wkatukonsentrasi_t);
@@ -323,13 +326,13 @@ $betaone=1+($V_q*$V_r);
 $vr_A=$wkatukonsentrasi_t;
 $vr_B=$vr_RT;
 // $vr_C=0.145;
-$vr_C=$betaone;
+$vr_C=1/$betaone;
 $vr_D=$luaspengaliran_a;
 
 $vr_E=($vr_A*$vr_B)/ ($vr_A+1);
 
 $vr_F=$vr_E/(3.6*$vr_A);
-$vr_G=$vr_C*$vr_D*65.60*$vr_F;
+$vr_G=$vr_C*$vr_D*$data_sungai['luas']*$vr_F;
 
 
 
@@ -344,11 +347,11 @@ $vr_G=$vr_C*$vr_D*65.60*$vr_F;
 								echo format_koma($vr_RT);
 								?>
 						</th>
-						<th style="text-align: center;"><?= format_koma($betaone);  ?></th>
+						<th style="text-align: center;"><?= format_koma($vr_C);  ?></th>
 						<th style="text-align: center;"><?= format_koma($luaspengaliran_a); ?></th>
 						<th style="text-align: center;"><?= format_koma($vr_E) ?></th>
 						<th style="text-align: center;"><?= format_koma($vr_F) ?></th>
-						<th style="text-align: center;"><?= $vr_G ?></th>
+						<th style="text-align: center;"><?= format_koma($vr_G) ?></th>
 					</tr>
 						<?php } ?>
 

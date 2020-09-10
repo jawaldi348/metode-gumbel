@@ -72,8 +72,14 @@
 							<th colspan="3">Standar Deviasi</th>
 							<th></th>
 							<th class="text-right">
+<!-- 								<?php $standar_deviasai = sqrt($pangkat2 / (count($method) - 1)) ?>
+								<?= format_koma($standar_deviasai) ?>
+ -->
+
 								<?php $standar_deviasai = sqrt($pangkat2 / (count($method) - 1)) ?>
 								<?= format_koma($standar_deviasai) ?>
+
+
 								<?php $standar_deviasai_log=$standar_deviasai; ?>
 							</th>
 							<th></th>
@@ -318,10 +324,19 @@ $var_x=floatval ($pangkat4);
 $var_n=floatval($jml_data);
 $var_n2=pow(floatval($jml_data), 2);
 $var_s4=pow($standar_deviasai, 4);
-$var_ck=($var_x * $var_n2  ) / ( ($var_n -1)*($var_n - 2)*($var_n - 3) * $var_s4 ) ;
+// $var_ck=$pangkat4 ;
+$var_ck=($pangkat4 * $var_n  ) / ( ($var_n -1)*($var_n - 2)*($var_n - 3) * $var_s4 ) ;
 
 // -------------- Log Pearson Type III-----------
-$var_cs_log=($var_n * round($pangkat3_log,3)) / ( ($var_n -1)*($var_n -2)* pow(round($standar_deviasai_log,3), 3) );
+	$x_var1=(round($pangkat3_log,4)*10);
+	$x_var2=(10-1) * (10-2) * pow($standar_deviasai_log,3);
+
+	$hasil= $x_var1 / $x_var2 ; 
+
+
+// $var_cs_log=($var_n * $pangkat3_log) / ( ($var_n -1)*($var_n -2)* pow($standar_deviasai_log, 3) );
+	 
+$var_cs_log=$hasil;
 // echo "stringtess : ". 103 ;
 
  ?>
@@ -370,9 +385,9 @@ $var_cs_log=($var_n * round($pangkat3_log,3)) / ( ($var_n -1)*($var_n -2)* pow(r
 					</tr>
 					<tr>
 						<td class="text-center"><i>Log Pearson Type III</i></td>
-						<td class="text-center">Cs= <?=  format_koma(round($var_cs_log,4)) ?></td>
+						<td class="text-center">Cs= <?= format_koma($var_cs_log)  ?></td>
 						<td class="text-center">
-							<?= format_koma( 0 - round($var_cs,4))    ?>
+							<?=   format_koma(0 - ($var_cs_log))    ?>
 							
 						</td>
 						<td class="text-center">

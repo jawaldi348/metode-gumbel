@@ -1,10 +1,33 @@
 <!-- -----------------------Chi-Kuadrat -->
+  <!-- Select2 -->
+  <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/select2/dist/css/select2.min.css">
+<script src="https://adminlte.io/themes/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+	$('.alpha').select2();
+	// $('.alpha').addClass('hidden');
 
+
+
+	// 	$('.alpha_value_btn').click(function() {
+	// 		$('.alpha').removedClass('hidden');
+	// 		$('.alpha_value').addClass('hidden');
+	// 	});
+	// 	$('.alpha').change(function() {
+	// 		$('.alpha_value').removedClass('hidden');
+	// 		$('.alpha').addClass('hidden');
+	// 	});
+	});
+
+</script>
+  <!-- Theme style -->
 <div class="row">
-		<div class="col-xs-6">
+		<div class="col-xs-3">
 		<div class="box">
 			<div class="box-header with-border">
-				<h3 class="box-title">Metode Chi-Kuadrat</h3>
+				<h3 class="box-title">Metode Chi-Kuadrat
+				</h3>
 				<div class="pull-right">
 					<h3 class="box-title"><?= $data['nama_stasiun'] ?></h3>
 				</div>
@@ -18,7 +41,11 @@
 							
 						</tr>
 						<?php
+
 						$no = 1;
+						$Xmax=0;
+						$Xmin=0;
+						$CHI[0]=0;
 						$total = 0;
 						$log = 0;
 						$pangkat1 = 0;
@@ -34,6 +61,14 @@
 							$pangkat1 = $pangkat1 + (log10($m['jumlah_curah'])-$ratalog);
 							$pangkat2 = $pangkat2 + (pow(log10($m['jumlah_curah'])-$ratalog, 2));
 							$pangkat3 = $pangkat3 + (pow(log10($m['jumlah_curah'])-$ratalog, 3));
+
+							if($no==10){
+								$Xmin=$m['jumlah_curah'];
+							}
+							if($no==1){
+								$Xmax=$m['jumlah_curah'];
+							}
+							$CHI[$no]=$m['jumlah_curah'];
 						?>
 							<tr>
 								<td class="text-center"><?= $no . '.' ?></td>
@@ -55,9 +90,90 @@
 						
 					</tfoot>
 				</table>
+
 			</div>
 		</div>
 	</div>
+		<div class="col-xs-3">
+					<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">Kelas Distribusi
+				</h3>
+				<div class="pull-right">
+					<h3 class="box-title"><?= $data['nama_stasiun'] ?></h3>
+				</div>
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered table-striped" >
+					<tbody>
+						<tr>
+							<th class="text-center" width="100px"></th>
+							<th class="text-right"></th>
+						</tr>
+
+							<tr style="background-color:#d2d6de; ">
+								<td class="text-center">Kelas Distribusi (K)</td>
+								<td class="text-left">
+									<i>
+									 K = 1+3,3 Log n<br>
+									  &nbsp;&nbsp;&nbsp;&nbsp;= 1+3,3 Log 10<br>
+									  &nbsp;&nbsp;&nbsp;&nbsp;= <b>4</b>
+									<i>
+									</td>
+							</tr>
+							<tr style="background-color:#d2d6de; ">
+								<td class="text-center">Nilai Ef</td>
+								<td class="text-left">
+									<i>
+									 Ef = n / k <br>
+									  &nbsp;&nbsp;&nbsp;&nbsp;= 10 / 4<br>
+									  &nbsp;&nbsp;&nbsp;&nbsp;= <b>2,5</b>
+									<i>
+									</td>
+							</tr>
+							<tr style="background-color:#d2d6de; ">
+								<td class="text-center">Derajat Kebebasan (Dk)</td>
+								<td class="text-left">
+									<i>
+									 Dk = K - R - 1 <br>
+									  &nbsp;&nbsp;&nbsp;&nbsp;= 4 - 1 - 1<br>
+									  &nbsp;&nbsp;&nbsp;&nbsp;= <b>2</b>
+									<i>
+									</td>
+							</tr>
+							<tr style="background-color:#d2d6de; ">
+								<td class="text-center">&alpha; =</td>
+								<td class="text-left">
+	<!-- 								<i class="alpha_value ">
+										data alpha
+									<a href="#" onclick="edit('<?= $p['key'] ?>')">
+										<i class="fa fa-gear alpha_value_btn" data-toggle="tooltip" data-original-title="Ubah Nilai &alpha; "></i></a>
+									</i>
+										 -->
+						              <div class="form-group">
+											<select style="width: 50%;" class="form-control  alpha">
+												<?php 
+												for($i=0;$i<100;$i++) {
+												 ?>
+												}
+												<option value="<?= ($i / 100)  ?>"> <?= $i ?>&nbsp;%</option>
+												<?php } ?>				
+											</select>
+						              </div>
+									</td>
+							</tr>
+	
+					</tbody>
+					<tfoot>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		</div>
+		<?php 
+		$DeltaX=($Xmax - $Xmin ) / (4-1);
+		$Xawal=$Xmin - ((1/2)*($DeltaX)); 
+		 ?>
 		<div class="col-xs-6">
 		<div class="box">
 			<div class="box-header">
@@ -74,10 +190,17 @@
 						<th >(Ef-Of)^2/Ef</th>
 					</tr>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>1.</td>
+						<td>
+							<?php $Batas_Max=($DeltaX+$Xawal); ?>
+						<?= format_koma($Xawal) ?> &ge; X &le; <?= format_koma($Batas_Max) ?>  
+						</td>
+						<td>2,5</td>
+						<td><?php
+							$X_Of=0;
+							for($n=1;$n<11;$n++){if($CHI[$n]<=222222222222222222222222222222SDDDDYYYYYYYYYYYYYYYYYYWK9YK){$X_Of+=1;}}
+								echo $X_Of;
+						 ?></td>
 						<td></td>
 						<td></td>
 					</tr>
