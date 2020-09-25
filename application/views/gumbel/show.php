@@ -31,7 +31,7 @@
 	<div class="col-xs-5">
 		<div class="box">
 			<div class="box-header with-border">
-				<h3 class="box-title">Perhitungan Curah Hujan Metode Gumbel</h3>
+				<h3 class="box-title">XXPerhitungan Curah Hujan Metode Gumbel</h3>
 				<div class="pull-right">
 					<h3 class="box-title"><?= $data['nama_stasiun'] ?></h3>
 				</div>

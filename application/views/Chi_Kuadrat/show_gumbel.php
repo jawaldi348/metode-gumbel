@@ -1,40 +1,8 @@
-<!-- -----------------------Chi-Kuadrat -->
-  <!-- Select2 -->
-  <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/select2/dist/css/select2.min.css">
-<script src="https://adminlte.io/themes/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-	$('.alpha').select2();
-	$('.metode_btn').click(function() {
-			$('.show_gumbel').removeClass('hidden');
-			$('.show_log').addClass('hidden');
-	});
-		$('.metode_gumbel_btn').click(function() {
-			$('.show_log').removeClass('hidden');
-			$('.show_gumbel').addClass('hidden');
-	});
-
-
-
-
-	// 	$('.alpha_value_btn').click(function() {
-	// 		$('.alpha').removedClass('hidden');
-	// 		$('.alpha_value').addClass('hidden');
-	// 	});
-	// 	$('.alpha').change(function() {
-	// 		$('.alpha_value').removedClass('hidden');
-	// 		$('.alpha').addClass('hidden');
-	// 	});
-	});
-
-</script>
-  <!-- Theme style -->
-<div class="row show_log">
+<div class="row">
 		<div class="col-xs-3">
 		<div class="box">
 			<div class="box-header with-border">
-				<h3 class="box-title">Metode Chi-Kuadrat <a href="#" class="btn metode_btn">(Log Person III)</a>
+				<h3 class="box-title">Metode Chi-Kuadrat <a href="#" class="btn metode_gumbel_btn"> (Gumbel)</a>
 				</h3>
 				<div class="pull-right">
 					<h3 class="box-title"><?= $data['nama_stasiun'] ?></h3>
@@ -49,39 +17,32 @@
 							
 						</tr>
 						<?php
-
+						$jml_data = count($method);
 						$no = 1;
 						$Xmax=0;
 						$Xmin=0;
 						$CHI[0]=0;
 						$total = 0;
-						$log = 0;
-						$pangkat1 = 0;
 						$pangkat2 = 0;
 						$pangkat3 = 0;
 						foreach ($method as $row) {
 							$total = $total + $row['jumlah_curah'];
-							$log = $log + log10($row['jumlah_curah']);
 						}
 						$rata  = $total / count($method);
-						$ratalog = $log / count($method);
 						foreach ($method as $m) {
-							$pangkat1 = $pangkat1 + (log10($m['jumlah_curah'])-$ratalog);
-							$pangkat2 = $pangkat2 + (pow(log10($m['jumlah_curah'])-$ratalog, 2));
-							$pangkat3 = $pangkat3 + (pow(log10($m['jumlah_curah'])-$ratalog, 3));
-
+							$pangkat2 = $pangkat2 + pow($m['jumlah_curah'] - $rata, 2);
+							$pangkat3 = $pangkat3 + pow($m['jumlah_curah'] - $rata, 3);
 							if($no==10){
-								$Xmin=log10($m['jumlah_curah']);
+								$Xmin=$m['jumlah_curah'];
 							}
 							if($no==1){
-								$Xmax=log10($m['jumlah_curah']);
+								$Xmax=$m['jumlah_curah'];
 							}
-							$CHI[$no]=log10($m['jumlah_curah']);
+							$CHI[$no]=$m['jumlah_curah'];
 						?>
 							<tr>
 								<td class="text-center"><?= $no . '.' ?></td>
-								<td class="text-right">
-									<?= format_koma(log10($m['jumlah_curah'])) ?></td>
+								<td class="text-right"><?= format_koma($m['jumlah_curah']) ?></td>
 							</tr>
 						<?php $no++;
 						} ?>
@@ -90,13 +51,21 @@
 						<tr>
 							<th>Jumlah</th>
 							<th class="text-right"><?= format_koma($total) ?></th>
-							<?php $pangkat3_log=$pangkat3 ?>
+							
 						</tr>
 						<tr>
 							<th>Rata-rata</th>
 							<th class="text-right"><?= format_koma($rata) ?></th>
+							<th></th>
+							<th></th>
+							<th></th>
 						</tr>
-						
+						<tr>
+							<th colspan="3">Standar Deviasi</th>
+							<?php $standar_deviasai = sqrt($pangkat2 / ($jml_data - 1)) ?>
+							<th class="text-right"><?= format_koma($standar_deviasai) ?></th>
+							<th></th>
+						</tr>
 					</tfoot>
 				</table>
 
@@ -311,31 +280,3 @@
 		</div>
 	</div>
 </div>
-<div class="show_gumbel hidden">
-<?php include('show_gumbel.php');  ?>
-	
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

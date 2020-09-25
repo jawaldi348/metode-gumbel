@@ -1,34 +1,4 @@
-<!-- -----------------------Chi-Kuadrat -->
-  <!-- Select2 -->
-  <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/select2/dist/css/select2.min.css">
-<script src="https://adminlte.io/themes/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-	$('.alpha').select2();
-	$('.metode_btn').click(function() {
-			$('.show_gumbel').removeClass('hidden');
-			$('.show_log').addClass('hidden');
-	});
-		$('.metode_gumbel_btn').click(function() {
-			$('.show_log').removeClass('hidden');
-			$('.show_gumbel').addClass('hidden');
-	});
 
-
-
-
-	// 	$('.alpha_value_btn').click(function() {
-	// 		$('.alpha').removedClass('hidden');
-	// 		$('.alpha_value').addClass('hidden');
-	// 	});
-	// 	$('.alpha').change(function() {
-	// 		$('.alpha_value').removedClass('hidden');
-	// 		$('.alpha').addClass('hidden');
-	// 	});
-	});
-
-</script>
   <!-- Theme style -->
 <div class="row show_log">
 		<div class="col-xs-3">
@@ -71,17 +41,16 @@
 							$pangkat3 = $pangkat3 + (pow(log10($m['jumlah_curah'])-$ratalog, 3));
 
 							if($no==10){
-								$Xmin=log10($m['jumlah_curah']);
+								$Xmin=$m['jumlah_curah'];
 							}
 							if($no==1){
-								$Xmax=log10($m['jumlah_curah']);
+								$Xmax=$m['jumlah_curah'];
 							}
-							$CHI[$no]=log10($m['jumlah_curah']);
+							$CHI[$no]=$m['jumlah_curah'];
 						?>
 							<tr>
 								<td class="text-center"><?= $no . '.' ?></td>
-								<td class="text-right">
-									<?= format_koma(log10($m['jumlah_curah'])) ?></td>
+								<td class="text-right"><?= format_koma($m['jumlah_curah']) ?></td>
 							</tr>
 						<?php $no++;
 						} ?>

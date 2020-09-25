@@ -7,6 +7,25 @@ class Mgumbel extends CI_Model
 		$this->db->order_by('jumlah_curah', 'DESC');
 		return $this->db->get('curah_hujan')->result_array();
 	}
+	public function rek_nilai()
+	{
+		$array=$this->db->query("SELECT*FROM rek_nilai")->result_array();
+		return $array;
+		
+	}
+	public function rek_nilai_edit($value)
+	{
+				$array=$this->db->query("SELECT*FROM rek_nilai WHERE rek_nilai.id_prob='$value' ")->row_array();
+		return $array;
+	}
+	public function rek_nilai_Update($param)
+	{
+		$kode = $param['kode'];
+		$data = [
+			'X2cr'  => $param['value']
+		];
+		return $this->db->where('id_prob', $kode)->update('rek_nilai',$data);
+	}
 	public function reduced_variated()
 	{
 		$array = array(

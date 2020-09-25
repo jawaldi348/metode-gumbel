@@ -160,7 +160,7 @@ $standar_deviasai_log = sqrt($pangkat2_log / (count($log_pearson) - 1)); ?>
 						
 $V_n=(-0.4)*($wkatukonsentrasi_t);
 $V_nx=(-0.4);
-$V_m=pow(10, $V_nx);
+$V_m=pow(10, $V_n);
 $V_o=$wkatukonsentrasi_t+(3.7*$V_m);
 
 //     /
@@ -285,7 +285,7 @@ $vr_G=$vr_C*$vr_D*65.60*$vr_F;
 						
 $V_n=(-0.4)*($wkatukonsentrasi_t);
 $V_nx=(-0.4);
-$V_m=pow(10, $V_nx);
+$V_m=pow(10, $V_n);
 $V_o=$wkatukonsentrasi_t+(3.7*$V_m);
 
 //     /
@@ -347,7 +347,7 @@ $vr_G=$vr_C*$vr_D*$data_sungai['luas']*$vr_F;
 								echo format_koma($vr_RT);
 								?>
 						</th>
-						<th style="text-align: center;"><?= format_koma($vr_C);  ?></th>
+						<th style="text-align: center;"><?= format_koma($vr_C)  ?></th>
 						<th style="text-align: center;"><?= format_koma($luaspengaliran_a); ?></th>
 						<th style="text-align: center;"><?= format_koma($vr_E) ?></th>
 						<th style="text-align: center;"><?= format_koma($vr_F) ?></th>

@@ -24,7 +24,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://curah-hujan.test:81/';
-$config['base_url'] = 'http://localhost/metode-gumbel/';
+// $config['base_url'] = 'http://localhost/metode-gumbel/';
+$config['base_url'] = 'https://www.metode-gumbel.e-lock.site/';
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ $config['base_url'] = 'http://localhost/metode-gumbel/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------

@@ -52,6 +52,7 @@
 	});
 
 	function edit(kode) {
+		// alert(kode);
 		$.ajax({
 			type: "post",
 			url: "<?= site_url('stasiun/edit') ?>",
